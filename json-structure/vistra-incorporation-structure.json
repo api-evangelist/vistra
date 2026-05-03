@@ -1,0 +1,43 @@
+{
+  "title": "Vistra Incorporation Request Structure",
+  "description": "Structural documentation for the IncorporationRequest object submitted to the Vistra Incorporations API",
+  "type": "object",
+  "fields": [
+    { "name": "jurisdiction", "type": "string", "required": true, "description": "Target jurisdiction code (BVI)" },
+    { "name": "companyName", "type": "string", "required": true, "description": "Proposed company name" },
+    { "name": "entityType", "type": "string", "required": true, "description": "business_company, llc, or limited_partnership" },
+    {
+      "name": "shareStructure",
+      "type": "object",
+      "required": false,
+      "fields": [
+        { "name": "authorizedShares", "type": "integer", "description": "Total authorized shares" },
+        { "name": "parValue", "type": "number", "description": "Par value per share" },
+        { "name": "currency", "type": "string", "description": "Currency code e.g. USD" }
+      ]
+    },
+    {
+      "name": "individuals",
+      "type": "array",
+      "required": false,
+      "description": "Individual stakeholders",
+      "items": [
+        { "name": "firstName", "type": "string", "required": true },
+        { "name": "lastName", "type": "string", "required": true },
+        { "name": "dateOfBirth", "type": "string", "required": false },
+        { "name": "nationality", "type": "string", "required": false },
+        { "name": "role", "type": "string", "required": true, "description": "director|shareholder|beneficial_owner|secretary" },
+        { "name": "shares", "type": "integer", "required": false },
+        { "name": "documentIds", "type": "array", "required": false }
+      ]
+    },
+    {
+      "name": "corporates",
+      "type": "array",
+      "required": false,
+      "description": "Corporate stakeholders"
+    },
+    { "name": "documentIds", "type": "array", "required": false, "description": "Uploaded document IDs" },
+    { "name": "notes", "type": "string", "required": false }
+  ]
+}

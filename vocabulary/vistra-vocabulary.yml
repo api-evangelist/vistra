@@ -1,0 +1,120 @@
+vocabulary:
+  name: Vistra API Vocabulary
+  description: >-
+    Vocabulary for the Vistra corporate services API, covering entity management,
+    company incorporation, compliance, and corporate governance terminology.
+  version: "1.0"
+  created: "2026-05-03"
+  tags:
+    - Compliance
+    - Corporate Services
+    - Entity Management
+    - Legal
+
+terms:
+  - term: Incorporation
+    definition: >-
+      The legal process of forming a new company or other legal entity in a given
+      jurisdiction. Vistra's Incorporations API automates the submission of BVI
+      incorporation requests including entity details, stakeholder identification,
+      and required documentation.
+    tags:
+      - Core
+      - Legal
+
+  - term: British Virgin Islands (BVI)
+    definition: >-
+      A British Overseas Territory that is one of the world's most popular offshore
+      incorporation jurisdictions. BVI Business Companies offer flexible structures,
+      low disclosure requirements, and no taxation on profits earned outside the territory.
+    tags:
+      - Jurisdiction
+      - Core
+
+  - term: Business Company
+    definition: >-
+      The most common BVI entity type used for holding assets, investment holding, and
+      international business operations. BVI Business Companies have authorized shares,
+      directors, and registered agents but minimal ongoing compliance requirements.
+    tags:
+      - Entity Type
+      - BVI
+
+  - term: Stakeholder
+    definition: >-
+      An individual or corporate entity with a legal interest in an incorporated company.
+      Stakeholder roles include director, shareholder, beneficial owner, and secretary.
+    tags:
+      - Corporate Governance
+      - Core
+
+  - term: Beneficial Owner
+    definition: >-
+      The natural person who ultimately owns or controls a company, regardless of
+      nominee arrangements. BVI law and global AML regulations require identification
+      of beneficial owners with more than 25% ownership.
+    tags:
+      - Compliance
+      - KYC/AML
+
+  - term: Registered Agent
+    definition: >-
+      A licensed professional or company in the jurisdiction that maintains the legal
+      registered address for an incorporated entity and receives official correspondence.
+      Required for all BVI Business Companies.
+    tags:
+      - Corporate Services
+      - BVI
+
+  - term: Authorized Shares
+    definition: >-
+      The maximum number of shares that a company is permitted to issue as defined
+      in its Memorandum of Association. BVI companies commonly have a standard
+      authorization of 50,000 shares.
+    tags:
+      - Corporate Structure
+      - Finance
+
+  - term: Par Value
+    definition: >-
+      The nominal value assigned to each share as stated in the company's constitutional
+      documents. BVI companies commonly use $1.00 USD par value per share.
+    tags:
+      - Corporate Structure
+      - Finance
+
+  - term: Pre-Signed URL
+    definition: >-
+      A time-limited URL that grants temporary permission to upload a file directly to
+      Vistra's document storage (Amazon S3) without requiring direct API authentication.
+      Valid for one minute after generation.
+    tags:
+      - API Pattern
+      - Documents
+
+  - term: Entity Management
+    definition: >-
+      The ongoing administration of a legal entity's corporate records, filings, deadlines,
+      and governance actions across one or more jurisdictions. Vistra's Global Expansion
+      Platform provides entity management for companies in 45+ jurisdictions.
+    tags:
+      - Corporate Services
+      - Core
+
+  - term: KYC (Know Your Customer)
+    definition: >-
+      Due diligence process required by anti-money laundering regulations to verify the
+      identity of clients, directors, shareholders, and beneficial owners. Supporting
+      documents such as passports and utility bills are required for incorporation.
+    tags:
+      - Compliance
+      - Regulation
+
+  - term: Geni
+    definition: >-
+      Vistra's AI compliance advisor embedded in the Global Expansion Platform that
+      answers corporate governance questions and can initiate common corporate actions
+      such as updating registered addresses or adding shareholders.
+    tags:
+      - AI
+      - Automation

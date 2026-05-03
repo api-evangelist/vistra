@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vistra/main/json-schema/vistra-incorporation-schema.json",
+  "title": "Vistra Incorporation Request",
+  "description": "JSON Schema for a Vistra company incorporation request, covering entity details, stakeholders, share structure, and supporting documents for BVI and other supported jurisdictions.",
+  "type": "object",
+  "required": ["jurisdiction", "companyName", "entityType"],
+  "properties": {
+    "jurisdiction": {
+      "type": "string",
+      "description": "Target incorporation jurisdiction (e.g. BVI for British Virgin Islands)",
+      "enum": ["BVI"]
+    },
+    "companyName": {
+      "type": "string",
+      "description": "Proposed company name for incorporation"
+    },
+    "entityType": {
+      "type": "string",
+      "description": "Type of legal entity to incorporate",
+      "enum": ["business_company", "llc", "limited_partnership"]
+    },
+    "shareStructure": {
+      "type": "object",
+      "description": "Company share capital structure",
+      "properties": {
+        "authorizedShares": {
+          "type": "integer",
+          "description": "Total number of authorized shares"
+        },
+        "parValue": {
+          "type": "number",
+          "description": "Par value per share"
+        },
+        "currency": {
+          "type": "string",
+          "description": "Currency code for par value (e.g. USD)"
+        }
+      }
+    },
+    "individuals": {
+      "type": "array",
+      "description": "Individual stakeholders including directors, shareholders, and beneficial owners",
+      "items": {
+        "type": "object",
+        "required": ["firstName", "lastName", "role"],
+        "properties": {
+          "firstName": { "type": "string" },
+          "lastName": { "type": "string" },
+          "dateOfBirth": { "type": "string", "format": "date" },
+          "nationality": { "type": "string" },
+          "role": {
+            "type": "string",
+            "enum": ["director", "shareholder", "beneficial_owner", "secretary"]
+          },
+          "shares": { "type": "integer" },
+          "documentIds": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "corporates": {
+      "type": "array",
+      "description": "Corporate stakeholders",
+      "items": {
+        "type": "object",
+        "properties": {
+          "companyName": { "type": "string" },
+          "jurisdiction": { "type": "string" },
+          "registrationNumber": { "type": "string" },
+          "role": {
+            "type": "string",
+            "enum": ["shareholder", "director"]
+          },
+          "shares": { "type": "integer" },
+          "documentIds": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "documentIds": {
+      "type": "array",
+      "description": "IDs of uploaded supporting documents",
+      "items": { "type": "string" }
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes or special instructions"
+    }
+  }
+}

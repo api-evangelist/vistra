@@ -1,0 +1,58 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.vistra.com/v1/external/incorporations",
+    "headers": {
+      "Authorization": "Bearer {{VISTRA_ACCESS_TOKEN}}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "jurisdiction": "BVI",
+      "companyName": "Acme Holdings Limited",
+      "entityType": "business_company",
+      "shareStructure": {
+        "authorizedShares": 50000,
+        "parValue": 1.00,
+        "currency": "USD"
+      },
+      "individuals": [
+        {
+          "firstName": "Jane",
+          "lastName": "Smith",
+          "dateOfBirth": "1980-06-15",
+          "nationality": "British",
+          "role": "director",
+          "documentIds": ["doc-a1b2c3d4-e5f6-7890-abcd-ef1234567890"]
+        },
+        {
+          "firstName": "John",
+          "lastName": "Doe",
+          "dateOfBirth": "1975-03-22",
+          "nationality": "American",
+          "role": "shareholder",
+          "shares": 50000,
+          "documentIds": ["doc-b2c3d4e5-f6a7-8901-bcde-f12345678901"]
+        }
+      ],
+      "documentIds": [
+        "doc-a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "doc-b2c3d4e5-f6a7-8901-bcde-f12345678901"
+      ]
+    }
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": "inc-x9y8z7w6-v5u4-3210-srqp-onmlkjihgfed",
+      "status": "pending",
+      "companyName": "Acme Holdings Limited",
+      "jurisdiction": "BVI",
+      "submittedAt": "2026-05-03T14:10:00Z",
+      "estimatedCompletionDate": "2026-05-10",
+      "referenceNumber": "VIS-BVI-2026-00142"
+    }
+  }
+}

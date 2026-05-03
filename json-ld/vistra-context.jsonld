@@ -1,0 +1,66 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "vistra": "https://www.vistra.com/ontology/",
+    "schema": "https://schema.org/",
+
+    "IncorporationRequest": "vistra:IncorporationRequest",
+    "IndividualStakeholder": "schema:Person",
+    "CorporateStakeholder": "schema:Organization",
+    "ShareStructure": "vistra:ShareStructure",
+    "RegisteredAgent": "vistra:RegisteredAgent",
+    "Document": "schema:DigitalDocument",
+
+    "companyName": "schema:legalName",
+    "jurisdiction": "vistra:jurisdiction",
+    "entityType": "vistra:entityType",
+    "status": "schema:status",
+    "referenceNumber": "schema:identifier",
+    "submittedAt": "schema:dateCreated",
+    "estimatedCompletionDate": "vistra:estimatedCompletionDate",
+
+    "firstName": "schema:givenName",
+    "lastName": "schema:familyName",
+    "dateOfBirth": "schema:birthDate",
+    "nationality": "schema:nationality",
+    "role": "vistra:stakeholderRole",
+    "shares": "vistra:shares",
+
+    "authorizedShares": "vistra:authorizedShares",
+    "parValue": "vistra:parValue",
+    "currency": "schema:currency",
+
+    "documentId": "@id",
+    "documentIds": {
+      "@id": "vistra:documentIds",
+      "@type": "@id"
+    },
+
+    "uploadUrl": "schema:url",
+    "expiresAt": "schema:expires",
+    "filename": "schema:name",
+    "size": "schema:contentSize",
+
+    "individuals": {
+      "@id": "vistra:individuals",
+      "@type": "schema:Person"
+    },
+    "corporates": {
+      "@id": "vistra:corporates",
+      "@type": "schema:Organization"
+    },
+    "shareStructure": {
+      "@id": "vistra:shareStructure"
+    },
+    "registeredAgent": {
+      "@id": "vistra:registeredAgent"
+    },
+
+    "name": "schema:name",
+    "address": "schema:address",
+    "notes": "schema:description",
+
+    "registrationNumber": "schema:taxID",
+    "id": "@id"
+  }
+}

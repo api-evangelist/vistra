@@ -1,0 +1,107 @@
+extends:
+  - spectral:oas
+
+rules:
+  # Operations must have summaries
+  vistra-operation-summary-required:
+    message: "All Vistra API operations must have a summary"
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: summary
+      function: truthy
+
+  # Summaries must use Title Case
+  vistra-summary-title-case:
+    message: "Operation summaries must use Title Case"
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9 ]+$"
+
+  # Operation IDs must be camelCase
+  vistra-operationid-camelcase:
+    message: "Operation IDs must use camelCase"
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  # All operations must be tagged
+  vistra-operation-tags:
+    message: "All operations must have at least one tag"
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: truthy
+
+  # POST create operations return 201
+  vistra-post-201:
+    message: "POST operations creating resources should return 201"
+    severity: warn
+    given: "$.paths[*].post.responses"
+    then:
+      field: "201"
+      function: truthy
+
+  # GET returns 200
+  vistra-get-200:
+    message: "GET operations must return 200 for success"
+    severity: error
+    given: "$.paths[*].get.responses"
+    then:
+      field: "200"
+      function: truthy
+
+  # All endpoints must document 401 response
+  vistra-401-documented:
+    message: "All endpoints should document 401 Unauthorized response"
+    severity: warn
+    given: "$.paths[*][*].responses"
+    then:
+      field: "401"
+      function: truthy
+
+  # Path parameters must be described
+  vistra-path-params-described:
+    message: "Path parameters must have descriptions"
+    severity: warn
+    given: "$.paths[*][*].parameters[?(@.in=='path')]"
+    then:
+      field: description
+      function: truthy
+
+  # All schemas should have descriptions
+  vistra-schema-descriptions:
+    message: "Component schemas should have descriptions"
+    severity: hint
+    given: "$.components.schemas[*]"
+    then:
+      field: description
+      function: truthy
+
+  # POST operations must have request bodies
+  vistra-post-has-body:
+    message: "POST operations must include a requestBody"
+    severity: error
+    given: "$.paths[*].post"
+    then:
+      field: requestBody
+      function: truthy
+
+  # API must use OAuth2
+  vistra-oauth2-security:
+    message: "All Vistra API paths should use OAuth2Bearer security"
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: security
+      function: schema
+      functionOptions:
+        schema:
+          type: array

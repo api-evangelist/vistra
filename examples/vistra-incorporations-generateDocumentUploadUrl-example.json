@@ -1,0 +1,26 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.vistra.com/v1/external/documents/upload-url",
+    "headers": {
+      "Authorization": "Bearer {{VISTRA_ACCESS_TOKEN}}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "filename": "passport-jane-smith.pdf",
+      "contentType": "application/pdf",
+      "description": "Director passport for BVI incorporation"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "documentId": "doc-a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "uploadUrl": "https://vistra-documents.s3.amazonaws.com/uploads/doc-a1b2c3d4-e5f6-7890-abcd-ef1234567890?AWSAccessKeyId=...",
+      "expiresAt": "2026-05-03T14:05:00Z"
+    }
+  }
+}
