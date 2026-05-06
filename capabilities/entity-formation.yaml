@@ -1,174 +1,267 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Vistra Entity Formation"
-  description: >-
-    Workflow capability for automating company entity formation and incorporation
-    via the Vistra REST API. Covers the complete BVI incorporation workflow:
-    document upload preparation, upload confirmation, and incorporation request
-    submission with entity details, stakeholders, and compliance data. Used by
-    legal teams, fund administrators, and corporate services professionals to
-    programmatically incorporate entities in supported jurisdictions.
+  label: Vistra Entity Formation
+  description: 'Workflow capability for automating company entity formation and incorporation via the Vistra REST API. Covers
+    the complete BVI incorporation workflow: document upload preparation, upload confirmation, and incorporation request submission
+    with entity details, stakeholders, and compliance data. Used by legal teams, fund administrators, and corporate services
+    professionals to programmatically incorporate entities in supported jurisdictions.'
   tags:
-    - BVI
-    - Compliance
-    - Corporate Services
-    - Entity Management
-    - Fortune 500
-    - Incorporation
-    - Legal
-    - Vistra
-  created: "2026-05-03"
-  modified: "2026-05-03"
-
+  - BVI
+  - Compliance
+  - Corporate Services
+  - Entity Management
+  - Fortune 500
+  - Incorporation
+  - Legal
+  - Vistra
+  created: '2026-05-03'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      VISTRA_ACCESS_TOKEN: VISTRA_ACCESS_TOKEN
-
+- namespace: env
+  keys:
+    VISTRA_ACCESS_TOKEN: VISTRA_ACCESS_TOKEN
 capability:
   consumes:
-    - import: vistra-incorporations
-      location: ./shared/vistra-incorporations.yaml
-
+  - type: http
+    namespace: vistra-incorporations
+    baseUri: https://api.vistra.com
+    description: Vistra Incorporations REST API for BVI entity formation
+    authentication:
+      type: bearer
+      token: '{{VISTRA_ACCESS_TOKEN}}'
+    resources:
+    - name: document-upload-url
+      path: /v1/external/documents/upload-url
+      description: Pre-signed document upload URL generation
+      operations:
+      - name: generate-document-upload-url
+        method: POST
+        description: Generate a pre-signed S3 URL for document upload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            filename: '{{tools.filename}}'
+            contentType: '{{tools.contentType}}'
+            description: '{{tools.description}}'
+    - name: document-upload-complete
+      path: /v1/external/documents/{id}/upload-complete
+      description: Document upload completion notification
+      operations:
+      - name: complete-document-upload
+        method: POST
+        description: Notify Vistra that a document upload has completed
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: Document ID from generate-upload-url
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: incorporations
+      path: /v1/external/incorporations
+      description: Incorporation request management
+      operations:
+      - name: create-incorporation
+        method: POST
+        description: Submit a company incorporation request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            jurisdiction: '{{tools.jurisdiction}}'
+            companyName: '{{tools.companyName}}'
+            entityType: '{{tools.entityType}}'
+            documentIds: '{{tools.documentIds}}'
+      - name: list-incorporations
+        method: GET
+        description: List submitted incorporation requests
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          required: false
+          description: Filter by status
+        - name: offset
+          in: query
+          type: integer
+          required: false
+        - name: limit
+          in: query
+          type: integer
+          required: false
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: incorporation
+      path: /v1/external/incorporations/{id}
+      description: Individual incorporation lookup
+      operations:
+      - name: get-incorporation
+        method: GET
+        description: Get status and details of a specific incorporation
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: Incorporation request ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: vistra-entity-formation-api
-      description: "Unified REST API for Vistra entity formation and incorporation workflows."
-      resources:
-        - path: /v1/incorporations
-          name: incorporations
-          description: "Company incorporation requests"
-          operations:
-            - method: GET
-              name: list-incorporations
-              description: "List all submitted incorporation requests"
-              call: "vistra-incorporations.list-incorporations"
-              with:
-                status: "rest.status"
-                offset: "rest.offset"
-                limit: "rest.limit"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-incorporation
-              description: "Submit a new company incorporation request"
-              call: "vistra-incorporations.create-incorporation"
-              with:
-                jurisdiction: "rest.jurisdiction"
-                companyName: "rest.companyName"
-                entityType: "rest.entityType"
-                documentIds: "rest.documentIds"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/incorporations/{id}
-          name: incorporation
-          description: "Individual incorporation request"
-          operations:
-            - method: GET
-              name: get-incorporation
-              description: "Get status of a specific incorporation request"
-              call: "vistra-incorporations.get-incorporation"
-              with:
-                id: "rest.id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/documents/upload-url
-          name: document-upload-url
-          description: "Document upload URL generation"
-          operations:
-            - method: POST
-              name: generate-document-upload-url
-              description: "Generate a pre-signed URL for document upload"
-              call: "vistra-incorporations.generate-document-upload-url"
-              with:
-                filename: "rest.filename"
-                contentType: "rest.contentType"
-                description: "rest.description"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/documents/{id}/upload-complete
-          name: document-upload-complete
-          description: "Document upload completion notification"
-          operations:
-            - method: POST
-              name: complete-document-upload
-              description: "Notify that a document upload has completed"
-              call: "vistra-incorporations.complete-document-upload"
-              with:
-                id: "rest.id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: vistra-entity-formation-mcp
-      transport: http
-      description: "MCP server for AI-assisted entity formation and corporate compliance workflows."
-      tools:
-        - name: generate-document-upload-url
-          description: "Generate a pre-signed S3 URL for uploading a supporting document for an incorporation request"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "vistra-incorporations.generate-document-upload-url"
-          with:
-            filename: "tools.filename"
-            contentType: "tools.contentType"
-            description: "tools.description"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: complete-document-upload
-          description: "Notify Vistra that a document upload to the pre-signed URL has completed"
-          hints:
-            readOnly: false
-            idempotent: true
-          call: "vistra-incorporations.complete-document-upload"
-          with:
-            id: "tools.id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-incorporation
-          description: "Submit a company incorporation request to Vistra for BVI entity formation"
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "vistra-incorporations.create-incorporation"
-          with:
-            jurisdiction: "tools.jurisdiction"
-            companyName: "tools.companyName"
-            entityType: "tools.entityType"
-            documentIds: "tools.documentIds"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-incorporations
-          description: "List all incorporation requests with their current processing status"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "vistra-incorporations.list-incorporations"
-          with:
-            status: "tools.status"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-incorporation
-          description: "Check the status and details of a specific incorporation request by ID"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "vistra-incorporations.get-incorporation"
-          with:
-            id: "tools.id"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: vistra-entity-formation-api
+    description: Unified REST API for Vistra entity formation and incorporation workflows.
+    resources:
+    - path: /v1/incorporations
+      name: incorporations
+      description: Company incorporation requests
+      operations:
+      - method: GET
+        name: list-incorporations
+        description: List all submitted incorporation requests
+        call: vistra-incorporations.list-incorporations
+        with:
+          status: rest.status
+          offset: rest.offset
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-incorporation
+        description: Submit a new company incorporation request
+        call: vistra-incorporations.create-incorporation
+        with:
+          jurisdiction: rest.jurisdiction
+          companyName: rest.companyName
+          entityType: rest.entityType
+          documentIds: rest.documentIds
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/incorporations/{id}
+      name: incorporation
+      description: Individual incorporation request
+      operations:
+      - method: GET
+        name: get-incorporation
+        description: Get status of a specific incorporation request
+        call: vistra-incorporations.get-incorporation
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/documents/upload-url
+      name: document-upload-url
+      description: Document upload URL generation
+      operations:
+      - method: POST
+        name: generate-document-upload-url
+        description: Generate a pre-signed URL for document upload
+        call: vistra-incorporations.generate-document-upload-url
+        with:
+          filename: rest.filename
+          contentType: rest.contentType
+          description: rest.description
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/documents/{id}/upload-complete
+      name: document-upload-complete
+      description: Document upload completion notification
+      operations:
+      - method: POST
+        name: complete-document-upload
+        description: Notify that a document upload has completed
+        call: vistra-incorporations.complete-document-upload
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: vistra-entity-formation-mcp
+    transport: http
+    description: MCP server for AI-assisted entity formation and corporate compliance workflows.
+    tools:
+    - name: generate-document-upload-url
+      description: Generate a pre-signed S3 URL for uploading a supporting document for an incorporation request
+      hints:
+        readOnly: false
+        idempotent: false
+      call: vistra-incorporations.generate-document-upload-url
+      with:
+        filename: tools.filename
+        contentType: tools.contentType
+        description: tools.description
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: complete-document-upload
+      description: Notify Vistra that a document upload to the pre-signed URL has completed
+      hints:
+        readOnly: false
+        idempotent: true
+      call: vistra-incorporations.complete-document-upload
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-incorporation
+      description: Submit a company incorporation request to Vistra for BVI entity formation
+      hints:
+        readOnly: false
+        idempotent: false
+      call: vistra-incorporations.create-incorporation
+      with:
+        jurisdiction: tools.jurisdiction
+        companyName: tools.companyName
+        entityType: tools.entityType
+        documentIds: tools.documentIds
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-incorporations
+      description: List all incorporation requests with their current processing status
+      hints:
+        readOnly: true
+        idempotent: true
+      call: vistra-incorporations.list-incorporations
+      with:
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-incorporation
+      description: Check the status and details of a specific incorporation request by ID
+      hints:
+        readOnly: true
+        idempotent: true
+      call: vistra-incorporations.get-incorporation
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
