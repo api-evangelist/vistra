@@ -8,131 +8,62 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Vistra
 providerId: vistra
-publisherName: Vistra
-serviceCategory: API
+publisherName: Vistra Corp.
+serviceCategory: Energy / Electricity
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Compliance
-  - Corporate Services
-  - Entity Management
-  - Finance
-  - Fortune 500
-  - Legal
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Vistra API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+  - Energy
+  - Electricity
+  - Retail Energy
+description: Vistra Corp is an integrated electricity retailer and generator. The FinOps surface
+  is electricity supply (kWh delivered, capacity, transmission) rather than metered API
+  consumption; this artifact is a Contact Sales placeholder and should not be confused with cloud-
+  service FinOps.
+sources:
+  - https://www.vistracorp.com/
+notes: No public unit prices for an API surface; meters reflect electricity-supply categories that
+  would appear on a Vistra retail invoice.
 billingModel:
-  pricingCategory: Usage-Based
+  pricingCategory: Energy Supply Contract
   billingFrequency: Monthly
   billingCurrency: USD
   chargeCategories:
     - Usage
-    - Purchase
     - Tax
-    - Credit
-    - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
   ServiceName: Vistra
-  ServiceCategory: Developer Tools / API
-  ProviderName: Vistra
-  PublisherName: Vistra
-  InvoiceIssuerName: Vistra
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceCategory: Energy / Electricity
+  ProviderName: Vistra Corp.
+  PublisherName: Vistra Corp.
   BillingCurrency: USD
-  ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: kwh_delivered
+    unit: kWh
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
+      - retail_brand
+      - rate_plan
+  - name: demand_charges
+    unit: kW
+    aggregation: max
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Vistra Incorporations API
-    baseURL: https://api.vistra.com
-    tags:
-      - BVI
-      - British Virgin Islands
-      - Compliance
-      - Corporate Services
-      - Entity Management
-      - Incorporation
-      - Legal
-      - OAuth2
-    serviceName: Vistra Incorporations API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - retail_brand
+principles:
+  - name: Visibility
+    description: Visibility is provided by the smart-meter / utility billing data feed and the
+      retail brand's customer portal (TXU, Homefield, etc.); there is no developer billing API.
+  - name: Allocation
+    description: Allocate spend by service-address / facility against the consuming business unit.
+  - name: Optimization
+    description: Optimization levers are commercial - rate-plan selection, demand-response
+      participation, on-site generation / storage, and contract term negotiation.
+  - name: Accountability
+    description: Facilities / energy management owns electricity spend; finance reconciles against
+      monthly utility statements.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
