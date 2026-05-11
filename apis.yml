@@ -76,6 +76,27 @@ common:
     url: vocabulary/vistra-vocabulary.yml
   - type: SpectralRules
     url: rules/vistra-rules.yml
+  - type: Integrations
+    url: https://www.vistra.com/partners
+integrations:
+  - name: Vistra
+  - name: test
+  - name: graphic curved lines
+  - name: Partner with Vistra - VC
+  - name: how-can-we-help-2
+  - name: Reseller
+  - name: Referral
+  - name: Advocate
+  - name: Oyster
+  - name: GP
+  - name: TriNet
+  - name: J.P.Morgan
+  - name: HSBC
+  - name: Cooley
+  - name: RemoFirst
+  - name: Consero
+  - name: Escalon
+  - name: Vistra WebChat QR Code
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
