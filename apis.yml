@@ -64,7 +64,7 @@ common:
     url: https://www.vistra.com/client-portals
   - type: Entity Management
     url: https://www.vistra.com/corporate/entity-management
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.vistra.com/privacy-policy
   - type: OpenAPI
     url: openapi/vistra-incorporations-openapi.yml
