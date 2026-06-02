@@ -1,0 +1,8 @@
+---
+title: Cross-border fund establishment checklist
+url: https://www.vistra.com/insights/cross-border-fund-establishment-checklist
+date: '2021-06-25'
+author: kevin.ruston
+feed_url: https://vistra.com/rss.xml
+---
+Cross-border fund establishment checklist kevin.ruston Fri, 06/25/2021 - 12:17 Publication Each country has its own set of evolving regulations and reporting requirements, including those related to ESG and economic substance. And investors themselves are more sophisticated than ever, no matter where they’re located. Each target market has its own set of cultural norms, tax considerations and ways of doing business. Our checklist provides actions your organisation should take to lower the risks of cross-border fund establishment. Areas addressed include: Developing an investment strategy, including fund goals, purchase targets, marketing strategy and more Choosing a fund domicile and fund structure, including domicile fund compliance, tax considerations, accounting for investor expectations and more Budgeting, including fund management and governance, capital flow, portfolio compliance and more Planning to deliver fund services, including service due diligence, investor service strategy and more Download Vistra’s Cross-border fund establishment checklist to lower your firm’s risks. Please complete your details below to download: 546 Show webform Hide 25 June 2021 Fund Solutions Fund Formation Fund Domiciliation Hide on listing page Off 1 Private equity firms look for value where they can find it, which often means setting up funds and attracting investors in new markets. But establishing a fund in a new country comes with risks.
