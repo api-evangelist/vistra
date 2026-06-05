@@ -1,10 +1,11 @@
 aid: vistra
 name: Vistra
-description: Vistra is a global corporate services provider operating in over 45 jurisdictions, offering entity management,
-  incorporation, compliance, payroll, and fund administration services. The Vistra REST API enables developers to programmatically
-  submit company incorporation requests in supported jurisdictions (initially British Virgin Islands), upload supporting documents
-  to pre-signed storage URLs, and integrate Vistra's corporate services into business process workflows. Authentication uses
-  OAuth2 bearer tokens obtained through the Vistra Developer Portal.
+description: >-
+  Vistra is a global corporate services provider operating in over 45 jurisdictions, offering entity management,
+  incorporation, compliance, payroll, and fund administration services. The Vistra REST API enables developers to
+  programmatically submit company incorporation requests in supported jurisdictions (initially British Virgin Islands),
+  upload supporting documents to pre-signed storage URLs, and integrate Vistra's corporate services into business
+  process workflows. Authentication uses OAuth2 bearer tokens obtained through the Vistra Developer Portal.
 image: https://www.vistra.com/themes/custom/vistra/logo.svg
 type: Index
 tags:
@@ -21,36 +22,34 @@ specificationVersion: '0.19'
 apis:
   - aid: vistra:incorporations-api
     name: Vistra Incorporations API
-    description: 'The Vistra Incorporations API enables programmatic submission of company incorporation requests in supported
-      jurisdictions. Currently available for the British Virgin Islands (BVI) on an invite-only basis, the API supports the
-      full incorporation workflow: generating pre-signed S3 document upload URLs, confirming document upload completion, and
-      submitting incorporation requests with entity details, stakeholder information, shareholding structure, and compliance
-      data. Authentication requires OAuth2 bearer tokens obtained from the Vistra Developer Portal.'
+    description: >-
+      The Vistra Incorporations API enables programmatic submission of company incorporation requests in supported
+      jurisdictions. Currently available for the British Virgin Islands (BVI) on an invite-only basis, the API supports
+      the full incorporation workflow: generating pre-signed S3 document upload URLs, confirming document upload
+      completion, and submitting incorporation requests with entity details, stakeholder information, shareholding
+      structure, and compliance data. Authentication requires OAuth2 bearer tokens obtained from the Vistra Developer
+      Portal.
     humanURL: https://help.vistra.com/en/articles/10351085-vistra-incorporations-api-british-virgin-islands
     baseURL: https://api.vistra.com
     tags:
-    - BVI
-    - British Virgin Islands
-    - Compliance
-    - Corporate Services
-    - Entity Management
-    - Incorporation
-    - Legal
-    - OAuth2
+      - BVI
+      - British Virgin Islands
+      - Compliance
+      - Corporate Services
+      - Entity Management
+      - Incorporation
+      - Legal
+      - OAuth2
     properties:
-    - type: Documentation
-      url: https://help.vistra.com/en/articles/10351085-vistra-incorporations-api-british-virgin-islands
-    - type: Developer Portal
-      url: https://devportal.vistra.com/
-    - type: OpenAPI
-      url: openapi/vistra-incorporations-openapi.yml
-    - type: NaftikoCapability
-      url: capabilities/incorporations-documents.yaml
-    - type: NaftikoCapability
-      url: capabilities/incorporations-incorporations.yaml
+      - type: Documentation
+        url: https://help.vistra.com/en/articles/10351085-vistra-incorporations-api-british-virgin-islands
+      - type: Developer Portal
+        url: https://devportal.vistra.com/
+      - type: OpenAPI
+        url: openapi/vistra-incorporations-openapi.yml
     contact:
-    - FN: Vistra Support
-      url: https://help.vistra.com/en/
+      - FN: Vistra Support
+        url: https://help.vistra.com/en/
 common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/vistra-energy
