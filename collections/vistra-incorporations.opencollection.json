@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vistra Incorporations API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate Document Upload URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vistra.com/v1/external/documents/upload-url",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a pre-signed S3 URL for uploading a supporting document for an incorporation request. The response includes a document ID and an upload URL that is valid for one minute. Upload the file directly to the pre-signed URL using an HTTP PUT request, then call the upload-complete endpoint with the document ID to notify Vistra the upload has finished."
+        },
+        {
+          "info": {
+            "name": "Complete Document Upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vistra.com/v1/external/documents/:id/upload-complete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The document ID returned by the generate-upload-url endpoint"
+              }
+            ]
+          },
+          "docs": "Notifies Vistra that a document upload to the pre-signed S3 URL has completed successfully. This endpoint must be called after the file has been uploaded directly to the pre-signed URL. The response confirms the document ID and returns file metadata including filename and size. The document ID is then used when submitting the incorporation request."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Incorporations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Incorporations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vistra.com/v1/external/incorporations",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by incorporation status"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page"
+              }
+            ]
+          },
+          "docs": "Returns a list of incorporation requests submitted through the API, including their current status and reference identifiers."
+        },
+        {
+          "info": {
+            "name": "Create Incorporation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vistra.com/v1/external/incorporations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a company incorporation request to Vistra after all supporting documents have been uploaded and their IDs recorded. The request body includes comprehensive entity information, individual and corporate stakeholders, shareholding structure, and compliance data. This endpoint is currently available for British Virgin Islands (BVI) incorporations on an invite-only basis."
+        },
+        {
+          "info": {
+            "name": "Get Incorporation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vistra.com/v1/external/incorporations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Incorporation request identifier"
+              }
+            ]
+          },
+          "docs": "Returns the current status and details of a specific incorporation request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

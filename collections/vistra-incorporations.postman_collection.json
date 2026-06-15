@@ -1,0 +1,1501 @@
+{
+  "item": [
+    {
+      "id": "8922730b-703d-4fed-b542-04a84f23dcd2",
+      "name": "Documents",
+      "description": {
+        "content": "Document upload URL generation and completion notification",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "87d61f3a-1a3c-4965-b3f5-ecc8990e9f7d",
+          "name": "Generate Document Upload URL",
+          "request": {
+            "name": "Generate Document Upload URL",
+            "description": {
+              "content": "Generates a pre-signed S3 URL for uploading a supporting document for an incorporation request. The response includes a document ID and an upload URL that is valid for one minute. Upload the file directly to the pre-signed URL using an HTTP PUT request, then call the upload-complete endpoint with the document ID to notify Vistra the upload has finished.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "external",
+                "documents",
+                "upload-url"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filename\": \"<string>\",\n  \"contentType\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8a97cd95-9a9c-4365-9c36-93b7a86c6c15",
+              "name": "Pre-signed upload URL and document ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "documents",
+                    "upload-url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"passport-john-doe.pdf\",\n  \"contentType\": \"application/pdf\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentId\": \"string\",\n  \"uploadUrl\": \"string\",\n  \"expiresAt\": \"1965-04-28T14:46:25.593Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd2d6914-cb94-4f00-b53c-33ac8cc6ac42",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "documents",
+                    "upload-url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"passport-john-doe.pdf\",\n  \"contentType\": \"application/pdf\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c985ba93-122a-4dcb-bd0a-dd43295cdb38",
+              "name": "Unauthorized - Invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "documents",
+                    "upload-url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"passport-john-doe.pdf\",\n  \"contentType\": \"application/pdf\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "261f5406-ced2-43d8-bb97-a4ad9e51351d",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "documents",
+                    "upload-url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"passport-john-doe.pdf\",\n  \"contentType\": \"application/pdf\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a99d2e05-7ab5-4983-bc2d-b2ac6bb35494",
+          "name": "Complete Document Upload",
+          "request": {
+            "name": "Complete Document Upload",
+            "description": {
+              "content": "Notifies Vistra that a document upload to the pre-signed S3 URL has completed successfully. This endpoint must be called after the file has been uploaded directly to the pre-signed URL. The response confirms the document ID and returns file metadata including filename and size. The document ID is then used when submitting the incorporation request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "external",
+                "documents",
+                ":id",
+                "upload-complete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The document ID returned by the generate-upload-url endpoint"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "176ad19d-48f4-4cec-b7a6-8a36567b3798",
+              "name": "Document upload confirmed with file details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "documents",
+                    ":id",
+                    "upload-complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The document ID returned by the generate-upload-url endpoint"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentId\": \"string\",\n  \"filename\": \"string\",\n  \"size\": 1295,\n  \"status\": \"failed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b86ab23-5181-484c-9858-66ff24ff36d9",
+              "name": "Invalid document ID or upload not yet completed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "documents",
+                    ":id",
+                    "upload-complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The document ID returned by the generate-upload-url endpoint"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "166dea59-cc55-4915-884b-e7173ad9792d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "documents",
+                    ":id",
+                    "upload-complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The document ID returned by the generate-upload-url endpoint"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c486011b-44b6-430c-b115-d22528c0d9dd",
+              "name": "Document ID not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "documents",
+                    ":id",
+                    "upload-complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The document ID returned by the generate-upload-url endpoint"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22cc3f14-5b30-422f-afd3-1ca3c9a38489",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "documents",
+                    ":id",
+                    "upload-complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The document ID returned by the generate-upload-url endpoint"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d2a6cb45-f48a-444f-ba9f-a876896b2595",
+      "name": "Incorporations",
+      "description": {
+        "content": "Company incorporation request submission and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e96171d5-8038-4dd3-af24-b9e1d1b8e8f8",
+          "name": "Create Incorporation",
+          "request": {
+            "name": "Create Incorporation",
+            "description": {
+              "content": "Submits a company incorporation request to Vistra after all supporting documents have been uploaded and their IDs recorded. The request body includes comprehensive entity information, individual and corporate stakeholders, shareholding structure, and compliance data. This endpoint is currently available for British Virgin Islands (BVI) incorporations on an invite-only basis.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "external",
+                "incorporations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jurisdiction\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"shareStructure\": {\n    \"authorizedShares\": \"<integer>\",\n    \"parValue\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"registeredAgent\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"jurisdiction\": \"<string>\"\n  },\n  \"individuals\": [\n    {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"role\": \"<string>\",\n      \"dateOfBirth\": \"<date>\",\n      \"nationality\": \"<string>\",\n      \"shares\": \"<integer>\",\n      \"documentIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"role\": \"<string>\",\n      \"dateOfBirth\": \"<date>\",\n      \"nationality\": \"<string>\",\n      \"shares\": \"<integer>\",\n      \"documentIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"corporates\": [\n    {\n      \"companyName\": \"<string>\",\n      \"jurisdiction\": \"<string>\",\n      \"registrationNumber\": \"<string>\",\n      \"role\": \"<string>\",\n      \"shares\": \"<integer>\",\n      \"documentIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"companyName\": \"<string>\",\n      \"jurisdiction\": \"<string>\",\n      \"registrationNumber\": \"<string>\",\n      \"role\": \"<string>\",\n      \"shares\": \"<integer>\",\n      \"documentIds\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"documentIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"notes\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "45df30aa-47a3-4552-8cc0-69f429c0c7cc",
+              "name": "Incorporation request submitted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "incorporations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jurisdiction\": \"BVI\",\n  \"companyName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"shareStructure\": {\n    \"authorizedShares\": 8399,\n    \"parValue\": 7687.722605037333,\n    \"currency\": \"string\"\n  },\n  \"registeredAgent\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"jurisdiction\": \"string\"\n  },\n  \"individuals\": [\n    {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"role\": \"shareholder\",\n      \"dateOfBirth\": \"1997-01-23\",\n      \"nationality\": \"string\",\n      \"shares\": 2605,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"role\": \"director\",\n      \"dateOfBirth\": \"2011-02-28\",\n      \"nationality\": \"string\",\n      \"shares\": 3323,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"corporates\": [\n    {\n      \"companyName\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"registrationNumber\": \"string\",\n      \"role\": \"shareholder\",\n      \"shares\": 6961,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"companyName\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"registrationNumber\": \"string\",\n      \"role\": \"shareholder\",\n      \"shares\": 2352,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"documentIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"processing\",\n  \"companyName\": \"string\",\n  \"jurisdiction\": \"string\",\n  \"submittedAt\": \"2009-02-06T04:28:04.604Z\",\n  \"estimatedCompletionDate\": \"1985-05-13\",\n  \"referenceNumber\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a197d227-8570-4f48-8a22-c0cf8c58b937",
+              "name": "Invalid incorporation request data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "incorporations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jurisdiction\": \"BVI\",\n  \"companyName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"shareStructure\": {\n    \"authorizedShares\": 8399,\n    \"parValue\": 7687.722605037333,\n    \"currency\": \"string\"\n  },\n  \"registeredAgent\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"jurisdiction\": \"string\"\n  },\n  \"individuals\": [\n    {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"role\": \"shareholder\",\n      \"dateOfBirth\": \"1997-01-23\",\n      \"nationality\": \"string\",\n      \"shares\": 2605,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"role\": \"director\",\n      \"dateOfBirth\": \"2011-02-28\",\n      \"nationality\": \"string\",\n      \"shares\": 3323,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"corporates\": [\n    {\n      \"companyName\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"registrationNumber\": \"string\",\n      \"role\": \"shareholder\",\n      \"shares\": 6961,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"companyName\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"registrationNumber\": \"string\",\n      \"role\": \"shareholder\",\n      \"shares\": 2352,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"documentIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42b502ac-5bfa-442a-860d-c074c7e04520",
+              "name": "Unauthorized - Invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "incorporations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jurisdiction\": \"BVI\",\n  \"companyName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"shareStructure\": {\n    \"authorizedShares\": 8399,\n    \"parValue\": 7687.722605037333,\n    \"currency\": \"string\"\n  },\n  \"registeredAgent\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"jurisdiction\": \"string\"\n  },\n  \"individuals\": [\n    {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"role\": \"shareholder\",\n      \"dateOfBirth\": \"1997-01-23\",\n      \"nationality\": \"string\",\n      \"shares\": 2605,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"role\": \"director\",\n      \"dateOfBirth\": \"2011-02-28\",\n      \"nationality\": \"string\",\n      \"shares\": 3323,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"corporates\": [\n    {\n      \"companyName\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"registrationNumber\": \"string\",\n      \"role\": \"shareholder\",\n      \"shares\": 6961,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"companyName\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"registrationNumber\": \"string\",\n      \"role\": \"shareholder\",\n      \"shares\": 2352,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"documentIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "438560cb-23ba-4096-a6c7-e9e6e4534cbe",
+              "name": "Forbidden - API access is invite-only",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "incorporations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jurisdiction\": \"BVI\",\n  \"companyName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"shareStructure\": {\n    \"authorizedShares\": 8399,\n    \"parValue\": 7687.722605037333,\n    \"currency\": \"string\"\n  },\n  \"registeredAgent\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"jurisdiction\": \"string\"\n  },\n  \"individuals\": [\n    {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"role\": \"shareholder\",\n      \"dateOfBirth\": \"1997-01-23\",\n      \"nationality\": \"string\",\n      \"shares\": 2605,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"role\": \"director\",\n      \"dateOfBirth\": \"2011-02-28\",\n      \"nationality\": \"string\",\n      \"shares\": 3323,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"corporates\": [\n    {\n      \"companyName\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"registrationNumber\": \"string\",\n      \"role\": \"shareholder\",\n      \"shares\": 6961,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"companyName\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"registrationNumber\": \"string\",\n      \"role\": \"shareholder\",\n      \"shares\": 2352,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"documentIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51536968-e92c-4e2b-8378-24d2af74f7d8",
+              "name": "Unprocessable entity - validation errors in request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "incorporations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jurisdiction\": \"BVI\",\n  \"companyName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"shareStructure\": {\n    \"authorizedShares\": 8399,\n    \"parValue\": 7687.722605037333,\n    \"currency\": \"string\"\n  },\n  \"registeredAgent\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"jurisdiction\": \"string\"\n  },\n  \"individuals\": [\n    {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"role\": \"shareholder\",\n      \"dateOfBirth\": \"1997-01-23\",\n      \"nationality\": \"string\",\n      \"shares\": 2605,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"role\": \"director\",\n      \"dateOfBirth\": \"2011-02-28\",\n      \"nationality\": \"string\",\n      \"shares\": 3323,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"corporates\": [\n    {\n      \"companyName\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"registrationNumber\": \"string\",\n      \"role\": \"shareholder\",\n      \"shares\": 6961,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"companyName\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"registrationNumber\": \"string\",\n      \"role\": \"shareholder\",\n      \"shares\": 2352,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"documentIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3750bce-0e0b-4464-8481-0b1e681eaecc",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "incorporations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jurisdiction\": \"BVI\",\n  \"companyName\": \"<string>\",\n  \"entityType\": \"<string>\",\n  \"shareStructure\": {\n    \"authorizedShares\": 8399,\n    \"parValue\": 7687.722605037333,\n    \"currency\": \"string\"\n  },\n  \"registeredAgent\": {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"jurisdiction\": \"string\"\n  },\n  \"individuals\": [\n    {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"role\": \"shareholder\",\n      \"dateOfBirth\": \"1997-01-23\",\n      \"nationality\": \"string\",\n      \"shares\": 2605,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"role\": \"director\",\n      \"dateOfBirth\": \"2011-02-28\",\n      \"nationality\": \"string\",\n      \"shares\": 3323,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"corporates\": [\n    {\n      \"companyName\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"registrationNumber\": \"string\",\n      \"role\": \"shareholder\",\n      \"shares\": 6961,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"companyName\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"registrationNumber\": \"string\",\n      \"role\": \"shareholder\",\n      \"shares\": 2352,\n      \"documentIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"documentIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ae02e4f-438f-4b87-be4d-f2e43f3d03c4",
+          "name": "List Incorporations",
+          "request": {
+            "name": "List Incorporations",
+            "description": {
+              "content": "Returns a list of incorporation requests submitted through the API, including their current status and reference identifiers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "external",
+                "incorporations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by incorporation status"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Number of records per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8cbd7059-7039-4ce8-95e8-974100f68397",
+              "name": "List of incorporation requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "incorporations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 988,\n  \"offset\": 9311,\n  \"limit\": 7072,\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"processing\",\n      \"companyName\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"submittedAt\": \"2014-10-22T08:41:24.412Z\",\n      \"estimatedCompletionDate\": \"1978-01-03\",\n      \"referenceNumber\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"pending\",\n      \"companyName\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"submittedAt\": \"1968-01-29T13:30:22.212Z\",\n      \"estimatedCompletionDate\": \"1984-09-05\",\n      \"referenceNumber\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79b58b44-6fa2-4441-90c9-14c7e5d5debc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "incorporations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2288c281-2312-4c7a-9696-28f61fc68391",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "incorporations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52e5b641-c346-4645-8159-af431dcefae6",
+          "name": "Get Incorporation",
+          "request": {
+            "name": "Get Incorporation",
+            "description": {
+              "content": "Returns the current status and details of a specific incorporation request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "external",
+                "incorporations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Incorporation request identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8038a37d-b535-4243-905a-289d48de9942",
+              "name": "Incorporation request details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "incorporations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Incorporation request identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"processing\",\n  \"companyName\": \"string\",\n  \"jurisdiction\": \"string\",\n  \"submittedAt\": \"2009-02-06T04:28:04.604Z\",\n  \"estimatedCompletionDate\": \"1985-05-13\",\n  \"referenceNumber\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4aa922a7-51a9-4a92-95a1-fb1aa99eccee",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "incorporations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Incorporation request identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "911fbc23-181a-4754-962a-19791dd58b56",
+              "name": "Incorporation not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "incorporations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Incorporation request identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "014920cc-5107-43fe-b2a9-4142fc759196",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "external",
+                    "incorporations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Incorporation request identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vistra.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5a45c73f-3246-4516-b767-3e86129d0899",
+    "name": "Vistra Incorporations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vistra Incorporations API enables programmatic submission of company incorporation requests in supported jurisdictions. Currently available for the British Virgin Islands (BVI) on an invite-only basis. The API supports a three-step workflow: (1) generate a pre-signed S3 document upload URL, (2) confirm document upload completion, and (3) submit the full incorporation request with entity details, stakeholders, shareholding structure, and compliance data. Authentication uses OAuth2 bearer tokens obtained from the Vistra Developer Portal.\n\nContact Support:\n Name: Vistra Developer Support",
+      "type": "text/plain"
+    }
+  }
+}
