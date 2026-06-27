@@ -43,7 +43,7 @@ apis:
     properties:
       - type: Documentation
         url: https://help.vistra.com/en/articles/10351085-vistra-incorporations-api-british-virgin-islands
-      - type: Developer Portal
+      - type: DeveloperPortal
         url: https://devportal.vistra.com/
       - type: OpenAPI
         url: openapi/vistra-incorporations-openapi.yml
@@ -55,7 +55,7 @@ common:
     url: https://www.linkedin.com/company/vistra-energy
   - type: Website
     url: https://www.vistra.com
-  - type: Developer Portal
+  - type: DeveloperPortal
     url: https://devportal.vistra.com/
   - type: Help Center
     url: https://help.vistra.com/en/
