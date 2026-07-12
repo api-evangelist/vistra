@@ -51,6 +51,14 @@ apis:
       - FN: Vistra Support
         url: https://help.vistra.com/en/
 common:
+  - type: TrustCenter
+    url: security/vistra-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/vistra-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/vistra-domain-security.yml
+  - type: Authentication
+    url: authentication/vistra-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/vistra-energy
   - type: Website
@@ -77,6 +85,8 @@ common:
     url: rules/vistra-rules.yml
   - type: Integrations
     url: https://www.vistra.com/partners
+  - url: https://vistra.com/insights/feed.xml
+    type: Blog
 integrations:
   - name: Vistra
   - name: test
