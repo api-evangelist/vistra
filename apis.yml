@@ -51,6 +51,8 @@ apis:
       - FN: Vistra Support
         url: https://help.vistra.com/en/
 common:
+  - type: AgenticAccess
+    url: agentic-access/vistra-agentic-access.yml
   - type: TrustCenter
     url: security/vistra-trust-center.yml
   - type: VulnerabilityDisclosure
