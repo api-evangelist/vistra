@@ -1,0 +1,179 @@
+openapi: 3.1.0
+info:
+  title: Vistra Incorporations Documents API
+  description: 'The Vistra Incorporations API enables programmatic submission of company incorporation requests in supported jurisdictions. Currently available for the British Virgin Islands (BVI) on an invite-only basis. The API supports a three-step workflow: (1) generate a pre-signed S3 document upload URL, (2) confirm document upload completion, and (3) submit the full incorporation request with entity details, stakeholders, shareholding structure, and compliance data. Authentication uses OAuth2 bearer tokens obtained from the Vistra Developer Portal.'
+  version: '1.0'
+  contact:
+    name: Vistra Developer Support
+    url: https://devportal.vistra.com/
+  license:
+    name: Vistra Terms of Use
+    url: https://www.vistra.com/terms-of-use
+  termsOfService: https://www.vistra.com/terms-of-use
+servers:
+- url: https://api.vistra.com
+  description: Vistra Production API
+security:
+- OAuth2Bearer: []
+tags:
+- name: Documents
+  description: Document upload URL generation and completion notification
+paths:
+  /v1/external/documents/upload-url:
+    post:
+      operationId: generateDocumentUploadUrl
+      summary: Generate Document Upload URL
+      description: Generates a pre-signed S3 URL for uploading a supporting document for an incorporation request. The response includes a document ID and an upload URL that is valid for one minute. Upload the file directly to the pre-signed URL using an HTTP PUT request, then call the upload-complete endpoint with the document ID to notify Vistra the upload has finished.
+      tags:
+      - Documents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentUploadRequest'
+      responses:
+        '200':
+          description: Pre-signed upload URL and document ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentUploadResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized - Invalid or missing bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/external/documents/{id}/upload-complete:
+    post:
+      operationId: completeDocumentUpload
+      summary: Complete Document Upload
+      description: Notifies Vistra that a document upload to the pre-signed S3 URL has completed successfully. This endpoint must be called after the file has been uploaded directly to the pre-signed URL. The response confirms the document ID and returns file metadata including filename and size. The document ID is then used when submitting the incorporation request.
+      tags:
+      - Documents
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The document ID returned by the generate-upload-url endpoint
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Document upload confirmed with file details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentUploadCompleteResponse'
+        '400':
+          description: Invalid document ID or upload not yet completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Document ID not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    DocumentUploadCompleteResponse:
+      type: object
+      description: Confirmation that a document upload has been registered
+      properties:
+        documentId:
+          type: string
+          description: Document identifier
+        filename:
+          type: string
+          description: Uploaded filename
+        size:
+          type: integer
+          description: File size in bytes
+        status:
+          type: string
+          description: Upload status
+          enum:
+          - completed
+          - pending
+          - failed
+    DocumentUploadResponse:
+      type: object
+      description: Pre-signed S3 URL and document ID for uploading a document
+      properties:
+        documentId:
+          type: string
+          description: Unique identifier for this document, used in subsequent calls
+        uploadUrl:
+          type: string
+          description: Pre-signed S3 URL for HTTP PUT file upload (valid for 1 minute)
+        expiresAt:
+          type: string
+          format: date-time
+          description: Expiry timestamp of the upload URL
+    DocumentUploadRequest:
+      type: object
+      description: Request to generate a pre-signed document upload URL
+      required:
+      - filename
+      - contentType
+      properties:
+        filename:
+          type: string
+          description: Name of the file to upload
+          example: passport-john-doe.pdf
+        contentType:
+          type: string
+          description: MIME type of the file
+          example: application/pdf
+        description:
+          type: string
+          description: Optional description of the document
+    Error:
+      type: object
+      description: API error response
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: string
+          description: Additional error details
+  securitySchemes:
+    OAuth2Bearer:
+      type: http
+      scheme: bearer
+      description: OAuth2 bearer token obtained from the Vistra Developer Portal. Include in the Authorization header as "Bearer {token}".
+externalDocs:
+  description: Vistra Incorporations API Documentation
+  url: https://help.vistra.com/en/articles/10351085-vistra-incorporations-api-british-virgin-islands
