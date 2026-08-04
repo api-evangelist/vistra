@@ -1,0 +1,16 @@
+{
+  "provider": "vistra",
+  "sources": [
+    "vistra-documents-api-openapi.yml",
+    "vistra-incorporations-api-openapi.yml"
+  ],
+  "outputs": [
+    "vistra-documents-api-openapi.yml",
+    "vistra-incorporations-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
