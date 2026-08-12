@@ -91,7 +91,7 @@ common:
   - type: PrivacyPolicy
     url: https://www.vistra.com/privacy-policy
   - type: OpenAPI
-    url: openapi/vistra-incorporations-openapi.yml
+    url: openapi/_original/vistra-incorporations-openapi.yml
   - type: JSONSchema
     url: json-schema/vistra-incorporation-schema.json
   - type: JSONLD
