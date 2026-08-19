@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vistra Documents Incorporations API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Incorporations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Incorporations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vistra.com/v1/external/incorporations",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by incorporation status"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page"
+              }
+            ]
+          },
+          "docs": "Returns a list of incorporation requests submitted through the API, including their current status and reference identifiers."
+        },
+        {
+          "info": {
+            "name": "Create Incorporation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vistra.com/v1/external/incorporations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a company incorporation request to Vistra after all supporting documents have been uploaded and their IDs recorded. The request body includes comprehensive entity information, individual and corporate stakeholders, shareholding structure, and compliance data. This endpoint is currently available for British Virgin Islands (BVI) incorporations on an invite-only basis."
+        },
+        {
+          "info": {
+            "name": "Get Incorporation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vistra.com/v1/external/incorporations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Incorporation request identifier"
+              }
+            ]
+          },
+          "docs": "Returns the current status and details of a specific incorporation request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

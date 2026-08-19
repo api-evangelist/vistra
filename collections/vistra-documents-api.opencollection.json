@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vistra Incorporations Documents API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate Document Upload URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vistra.com/v1/external/documents/upload-url",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a pre-signed S3 URL for uploading a supporting document for an incorporation request. The response includes a document ID and an upload URL that is valid for one minute. Upload the file directly to the pre-signed URL using an HTTP PUT request, then call the upload-complete endpoint with the document ID to notify Vistra the upload has finished."
+        },
+        {
+          "info": {
+            "name": "Complete Document Upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vistra.com/v1/external/documents/:id/upload-complete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The document ID returned by the generate-upload-url endpoint"
+              }
+            ]
+          },
+          "docs": "Notifies Vistra that a document upload to the pre-signed S3 URL has completed successfully. This endpoint must be called after the file has been uploaded directly to the pre-signed URL. The response confirms the document ID and returns file metadata including filename and size. The document ID is then used when submitting the incorporation request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
