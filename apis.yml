@@ -6,6 +6,17 @@ description: >-
   programmatically submit company incorporation requests in supported jurisdictions (initially British Virgin Islands),
   upload supporting documents to pre-signed storage URLs, and integrate Vistra's corporate services into business
   process workflows. Authentication uses OAuth2 bearer tokens obtained through the Vistra Developer Portal.
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
