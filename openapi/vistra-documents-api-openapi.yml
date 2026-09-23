@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Vistra Incorporations Documents API
-  description: 'The Vistra Incorporations API enables programmatic submission of company incorporation requests in supported jurisdictions. Currently available for the British Virgin Islands (BVI) on an invite-only basis. The API supports a three-step workflow: (1) generate a pre-signed S3 document upload URL, (2) confirm document upload completion, and (3) submit the full incorporation request with entity details, stakeholders, shareholding structure, and compliance data. Authentication uses OAuth2 bearer tokens obtained from the Vistra Developer Portal.'
+  description: The Vistra Incorporations API enables programmatic submission of company incorporation requests in supported jurisdictions.
   version: '1.0'
   contact:
     name: Vistra Developer Support
@@ -124,20 +124,6 @@ components:
           - completed
           - pending
           - failed
-    DocumentUploadResponse:
-      type: object
-      description: Pre-signed S3 URL and document ID for uploading a document
-      properties:
-        documentId:
-          type: string
-          description: Unique identifier for this document, used in subsequent calls
-        uploadUrl:
-          type: string
-          description: Pre-signed S3 URL for HTTP PUT file upload (valid for 1 minute)
-        expiresAt:
-          type: string
-          format: date-time
-          description: Expiry timestamp of the upload URL
     DocumentUploadRequest:
       type: object
       description: Request to generate a pre-signed document upload URL
@@ -169,6 +155,20 @@ components:
         details:
           type: string
           description: Additional error details
+    DocumentUploadResponse:
+      type: object
+      description: Pre-signed S3 URL and document ID for uploading a document
+      properties:
+        documentId:
+          type: string
+          description: Unique identifier for this document, used in subsequent calls
+        uploadUrl:
+          type: string
+          description: Pre-signed S3 URL for HTTP PUT file upload (valid for 1 minute)
+        expiresAt:
+          type: string
+          format: date-time
+          description: Expiry timestamp of the upload URL
   securitySchemes:
     OAuth2Bearer:
       type: http
