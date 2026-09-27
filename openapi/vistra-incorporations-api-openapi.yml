@@ -162,79 +162,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    IncorporationResponse:
-      type: object
-      description: Response after submitting an incorporation request
-      properties:
-        id:
-          type: string
-          description: Unique incorporation request identifier
-        status:
-          type: string
-          description: Current status of the incorporation request
-          enum:
-          - pending
-          - processing
-          - completed
-          - rejected
-        companyName:
-          type: string
-        jurisdiction:
-          type: string
-        submittedAt:
-          type: string
-          format: date-time
-        estimatedCompletionDate:
-          type: string
-          format: date
-        referenceNumber:
-          type: string
-          description: Vistra's internal reference number
-    IndividualStakeholder:
-      type: object
-      description: An individual stakeholder in the incorporated entity
-      required:
-      - firstName
-      - lastName
-      - role
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        dateOfBirth:
-          type: string
-          format: date
-        nationality:
-          type: string
-        role:
-          type: string
-          enum:
-          - director
-          - shareholder
-          - beneficial_owner
-          - secretary
-        shares:
-          type: integer
-          description: Number of shares held (for shareholders)
-        documentIds:
-          type: array
-          items:
-            type: string
-          description: IDs of identity documents for this stakeholder
-    ShareStructure:
-      type: object
-      description: Shareholding structure for the company
-      properties:
-        authorizedShares:
-          type: integer
-          description: Total number of authorized shares
-        parValue:
-          type: number
-          description: Par value per share
-        currency:
-          type: string
-          description: Currency for par value (e.g. USD)
     IncorporationRequest:
       type: object
       description: Full incorporation request including entity details, stakeholders, shareholding structure, and compliance information.
@@ -279,6 +206,38 @@ components:
         notes:
           type: string
           description: Additional notes or special instructions
+    IndividualStakeholder:
+      type: object
+      description: An individual stakeholder in the incorporated entity
+      required:
+      - firstName
+      - lastName
+      - role
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+        nationality:
+          type: string
+        role:
+          type: string
+          enum:
+          - director
+          - shareholder
+          - beneficial_owner
+          - secretary
+        shares:
+          type: integer
+          description: Number of shares held (for shareholders)
+        documentIds:
+          type: array
+          items:
+            type: string
+          description: IDs of identity documents for this stakeholder
     ValidationError:
       type: object
       description: Validation error with field-level details
@@ -296,19 +255,34 @@ components:
                 type: string
               message:
                 type: string
-    Error:
+    IncorporationResponse:
       type: object
-      description: API error response
+      description: Response after submitting an incorporation request
       properties:
-        code:
+        id:
           type: string
-          description: Error code
-        message:
+          description: Unique incorporation request identifier
+        status:
           type: string
-          description: Human-readable error message
-        details:
+          description: Current status of the incorporation request
+          enum:
+          - pending
+          - processing
+          - completed
+          - rejected
+        companyName:
           type: string
-          description: Additional error details
+        jurisdiction:
+          type: string
+        submittedAt:
+          type: string
+          format: date-time
+        estimatedCompletionDate:
+          type: string
+          format: date
+        referenceNumber:
+          type: string
+          description: Vistra's internal reference number
     RegisteredAgent:
       type: object
       description: Registered agent details
@@ -319,6 +293,19 @@ components:
           type: string
         jurisdiction:
           type: string
+    ShareStructure:
+      type: object
+      description: Shareholding structure for the company
+      properties:
+        authorizedShares:
+          type: integer
+          description: Total number of authorized shares
+        parValue:
+          type: number
+          description: Par value per share
+        currency:
+          type: string
+          description: Currency for par value (e.g. USD)
     IncorporationList:
       type: object
       properties:
@@ -353,6 +340,19 @@ components:
           type: array
           items:
             type: string
+    Error:
+      type: object
+      description: API error response
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: string
+          description: Additional error details
   securitySchemes:
     OAuth2Bearer:
       type: http
