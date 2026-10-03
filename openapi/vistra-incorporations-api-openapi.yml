@@ -162,6 +162,153 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    IncorporationList:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/IncorporationResponse'
+    IndividualStakeholder:
+      type: object
+      description: An individual stakeholder in the incorporated entity
+      required:
+      - firstName
+      - lastName
+      - role
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+        nationality:
+          type: string
+        role:
+          type: string
+          enum:
+          - director
+          - shareholder
+          - beneficial_owner
+          - secretary
+        shares:
+          type: integer
+          description: Number of shares held (for shareholders)
+        documentIds:
+          type: array
+          items:
+            type: string
+          description: IDs of identity documents for this stakeholder
+    IncorporationResponse:
+      type: object
+      description: Response after submitting an incorporation request
+      properties:
+        id:
+          type: string
+          description: Unique incorporation request identifier
+        status:
+          type: string
+          description: Current status of the incorporation request
+          enum:
+          - pending
+          - processing
+          - completed
+          - rejected
+        companyName:
+          type: string
+        jurisdiction:
+          type: string
+        submittedAt:
+          type: string
+          format: date-time
+        estimatedCompletionDate:
+          type: string
+          format: date
+        referenceNumber:
+          type: string
+          description: Vistra's internal reference number
+    ValidationError:
+      type: object
+      description: Validation error with field-level details
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    ShareStructure:
+      type: object
+      description: Shareholding structure for the company
+      properties:
+        authorizedShares:
+          type: integer
+          description: Total number of authorized shares
+        parValue:
+          type: number
+          description: Par value per share
+        currency:
+          type: string
+          description: Currency for par value (e.g. USD)
+    Error:
+      type: object
+      description: API error response
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: string
+          description: Additional error details
+    CorporateStakeholder:
+      type: object
+      description: A corporate entity as a stakeholder
+      properties:
+        companyName:
+          type: string
+        jurisdiction:
+          type: string
+        registrationNumber:
+          type: string
+        role:
+          type: string
+          enum:
+          - shareholder
+          - director
+        shares:
+          type: integer
+        documentIds:
+          type: array
+          items:
+            type: string
+    RegisteredAgent:
+      type: object
+      description: Registered agent details
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        jurisdiction:
+          type: string
     IncorporationRequest:
       type: object
       description: Full incorporation request including entity details, stakeholders, shareholding structure, and compliance information.
@@ -206,153 +353,6 @@ components:
         notes:
           type: string
           description: Additional notes or special instructions
-    IndividualStakeholder:
-      type: object
-      description: An individual stakeholder in the incorporated entity
-      required:
-      - firstName
-      - lastName
-      - role
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        dateOfBirth:
-          type: string
-          format: date
-        nationality:
-          type: string
-        role:
-          type: string
-          enum:
-          - director
-          - shareholder
-          - beneficial_owner
-          - secretary
-        shares:
-          type: integer
-          description: Number of shares held (for shareholders)
-        documentIds:
-          type: array
-          items:
-            type: string
-          description: IDs of identity documents for this stakeholder
-    ValidationError:
-      type: object
-      description: Validation error with field-level details
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-    IncorporationResponse:
-      type: object
-      description: Response after submitting an incorporation request
-      properties:
-        id:
-          type: string
-          description: Unique incorporation request identifier
-        status:
-          type: string
-          description: Current status of the incorporation request
-          enum:
-          - pending
-          - processing
-          - completed
-          - rejected
-        companyName:
-          type: string
-        jurisdiction:
-          type: string
-        submittedAt:
-          type: string
-          format: date-time
-        estimatedCompletionDate:
-          type: string
-          format: date
-        referenceNumber:
-          type: string
-          description: Vistra's internal reference number
-    RegisteredAgent:
-      type: object
-      description: Registered agent details
-      properties:
-        name:
-          type: string
-        address:
-          type: string
-        jurisdiction:
-          type: string
-    ShareStructure:
-      type: object
-      description: Shareholding structure for the company
-      properties:
-        authorizedShares:
-          type: integer
-          description: Total number of authorized shares
-        parValue:
-          type: number
-          description: Par value per share
-        currency:
-          type: string
-          description: Currency for par value (e.g. USD)
-    IncorporationList:
-      type: object
-      properties:
-        total:
-          type: integer
-        offset:
-          type: integer
-        limit:
-          type: integer
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/IncorporationResponse'
-    CorporateStakeholder:
-      type: object
-      description: A corporate entity as a stakeholder
-      properties:
-        companyName:
-          type: string
-        jurisdiction:
-          type: string
-        registrationNumber:
-          type: string
-        role:
-          type: string
-          enum:
-          - shareholder
-          - director
-        shares:
-          type: integer
-        documentIds:
-          type: array
-          items:
-            type: string
-    Error:
-      type: object
-      description: API error response
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Human-readable error message
-        details:
-          type: string
-          description: Additional error details
   securitySchemes:
     OAuth2Bearer:
       type: http
