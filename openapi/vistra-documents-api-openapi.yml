@@ -104,37 +104,20 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
+    DocumentUploadResponse:
       type: object
-      description: API error response
+      description: Pre-signed S3 URL and document ID for uploading a document
       properties:
-        code:
+        documentId:
           type: string
-          description: Error code
-        message:
+          description: Unique identifier for this document, used in subsequent calls
+        uploadUrl:
           type: string
-          description: Human-readable error message
-        details:
+          description: Pre-signed S3 URL for HTTP PUT file upload (valid for 1 minute)
+        expiresAt:
           type: string
-          description: Additional error details
-    DocumentUploadRequest:
-      type: object
-      description: Request to generate a pre-signed document upload URL
-      required:
-      - filename
-      - contentType
-      properties:
-        filename:
-          type: string
-          description: Name of the file to upload
-          example: passport-john-doe.pdf
-        contentType:
-          type: string
-          description: MIME type of the file
-          example: application/pdf
-        description:
-          type: string
-          description: Optional description of the document
+          format: date-time
+          description: Expiry timestamp of the upload URL
     DocumentUploadCompleteResponse:
       type: object
       description: Confirmation that a document upload has been registered
@@ -155,20 +138,37 @@ components:
           - completed
           - pending
           - failed
-    DocumentUploadResponse:
+    DocumentUploadRequest:
       type: object
-      description: Pre-signed S3 URL and document ID for uploading a document
+      description: Request to generate a pre-signed document upload URL
+      required:
+      - filename
+      - contentType
       properties:
-        documentId:
+        filename:
           type: string
-          description: Unique identifier for this document, used in subsequent calls
-        uploadUrl:
+          description: Name of the file to upload
+          example: passport-john-doe.pdf
+        contentType:
           type: string
-          description: Pre-signed S3 URL for HTTP PUT file upload (valid for 1 minute)
-        expiresAt:
+          description: MIME type of the file
+          example: application/pdf
+        description:
           type: string
-          format: date-time
-          description: Expiry timestamp of the upload URL
+          description: Optional description of the document
+    Error:
+      type: object
+      description: API error response
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: string
+          description: Additional error details
   securitySchemes:
     OAuth2Bearer:
       type: http
