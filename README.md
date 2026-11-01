@@ -1,4 +1,4 @@
-# Vistra (vistra)
+# Vistra
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,71 +66,157 @@
 
 Vistra is a global corporate services provider operating in over 45 jurisdictions, offering entity management, incorporation, compliance, payroll, and fund administration services. The Vistra REST API enables developers to programmatically submit company incorporation requests in supported jurisdictions (initially British Virgin Islands), upload supporting documents to pre-signed storage URLs, and integrate Vistra's corporate services into business process workflows. Authentication uses OAuth2 bearer tokens obtained through the Vistra Developer Portal.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/vistra/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/vistra/refs/heads/main/apis.yml)
+**Areas:** Compliance · Corporate Services · Entity Management · Finance · Fortune 500 · Legal
 
-## Scope
+## Vistra on APIs.io
 
-- **Type:** Index
+Everything profiled for Vistra is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/vistra/](https://apis.io/providers/vistra/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (2)
 
-- Compliance
-- Corporate Services
-- Entity Management
-- Finance
-- Fortune 500
-- Legal
+- [Vistra Documents API](https://apis.io/apis/vistra/vistra-documents-api/) — Document upload URL generation and completion notification
+- [Vistra Incorporations API](https://apis.io/apis/vistra/vistra-incorporations-api/) — Company incorporation request submission and management
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-21
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Vistra Incorporations API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Vistra Incorporations API enables programmatic submission of company incorporation requests in supported jurisdictions. Currently available for the British Virgin Islands (BVI) on an invite-only basis, the API supports the full incorporation workflow: generating pre-signed S3 document upload URLs, confirming document upload completion, and submitting incorporation requests with entity details, stakeholder information, shareholding structure, and compliance data. Authentication requires OAuth2 bearer tokens obtained from the Vistra Developer Portal.
+- [Vistra Agentic Access](https://apis.io/agentic-access/vistra/vistra-agentic-access/)
 
-- **Human URL:** [https://help.vistra.com/en/articles/10351085-vistra-incorporations-api-british-virgin-islands](https://help.vistra.com/en/articles/10351085-vistra-incorporations-api-british-virgin-islands)
-- **Base URL:** `https://api.vistra.com`
+#### JSON Schema (1)
 
-#### Tags
+The data models the API reads and writes.
 
-- BVI
-- British Virgin Islands
-- Compliance
-- Corporate Services
-- Entity Management
-- Incorporation
-- Legal
-- OAuth2
+- [Vistra Incorporation Request](https://apis.io/schemas/vistra/vistra-incorporation/)
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://help.vistra.com/en/articles/10351085-vistra-incorporations-api-british-virgin-islands)
-- [Developer  Portal](https://devportal.vistra.com/)
-- [OpenAPI](openapi/vistra-incorporations-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/vistra-incorporations.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/vistra-incorporations.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Data models expressed in JSON Structure.
 
-## Common Properties
+- [Vistra Incorporation Structure](https://apis.io/json-structure/vistra/vistra-incorporation-structure/)
 
-- [LinkedIn](https://www.linkedin.com/company/vistra-energy)
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Vistra Context](https://apis.io/jsonld/vistra/vistra-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Vistra API Vocabulary](https://apis.io/vocabularies/vistra/vistra-vocabulary/)
+
+#### Examples (2)
+
+Example requests and responses.
+
+- [Vistra Incorporations Createincorporation Example](https://apis.io/examples/vistra/vistra-incorporations-createIncorporation-example/)
+- [Vistra Incorporations Generatedocumentuploadurl Example](https://apis.io/examples/vistra/vistra-incorporations-generateDocumentUploadUrl-example/)
+
+#### Collections (3)
+
+Postman and Open Collection request collections.
+
+- [Vistra Incorporations Documents API](https://apis.io/collections/vistra/open-vistra-documents-api/)
+- [Vistra Incorporations API](https://apis.io/collections/vistra/open-vistra-incorporations/)
+- [Vistra Documents Incorporations API](https://apis.io/collections/vistra/open-vistra-incorporations-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Vistra — jsonschema rules](https://apis.io/rules/vistra/vistra-jsonschema-spectral-rules/)
+- [Vistra API Rules](https://apis.io/rules/vistra/vistra-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Vistra Authentication](https://apis.io/security/vistra/vistra-authentication/)
+- [Vistra Domain Security](https://apis.io/security/vistra/vistra-domain-security/)
+- [Vistra Trust Center](https://apis.io/security/vistra/vistra-trust-center/)
+- [Vistra Vulnerability Disclosure](https://apis.io/security/vistra/vistra-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Vistra Plans Pricing](https://apis.io/plans/vistra/vistra-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Vistra Rate Limits](https://apis.io/rate-limits/vistra/vistra-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Vistra Finops](https://apis.io/finops/vistra/vistra-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.vistra.com)
-- [Developer  Portal](https://devportal.vistra.com/)
-- [Help  Center](https://help.vistra.com/en/)
-- [Client  Portals](https://www.vistra.com/client-portals)
-- [Entity  Management](https://www.vistra.com/corporate/entity-management)
-- [Privacy Policy](https://www.vistra.com/privacy-policy)
-- [OpenAPI](openapi/vistra-incorporations-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [JSON Schema](json-schema/vistra-incorporation-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/vistra-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Vocabulary](vocabulary/vistra-vocabulary.yml)
-- [Spectral Rules](rules/vistra-rules.yml)
-- [Integrations](https://www.vistra.com/partners)
+- [Blog](https://vistra.com/insights/feed.xml)
+- [Privacy policy](https://www.vistra.com/privacy-policy)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 33.8** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 54.7 |
+| Contract governance | 27.3 |
+| Operational transparency | 5.3 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 13.2 |
+
+**Agent readiness 23.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 27.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/vistra/](https://apis.io/providers/vistra/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Vistra: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/vistra/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
